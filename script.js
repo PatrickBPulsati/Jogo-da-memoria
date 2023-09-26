@@ -18,8 +18,6 @@ function createBoard() {
     }
 }
 
-
-
 function checkForMatch() {
     if (cardsChosen[0] === cardsChosen[1]) {
         cardsMatched.push(cardsChosen[0]);
@@ -41,7 +39,6 @@ function checkForMatch() {
     }
 }
 
-
 function flipCard() {
     const cardId = this.getAttribute("data-id");
 
@@ -59,9 +56,7 @@ function flipCard() {
     }
 }
 
-
 createBoard();
-
 
 document.addEventListener("DOMContentLoaded", () => {
     const shuffleButton = document.getElementById("shuffle-button");
@@ -84,4 +79,3 @@ function shuffleCards() {
         card.setAttribute("data-id", index);
     });
 }
-

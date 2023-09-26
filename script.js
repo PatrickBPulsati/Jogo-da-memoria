@@ -10,7 +10,7 @@ function createBoard() {
 
     for (let i = 0; i < cardsArray.length; i++) {
         const card = document.createElement("div");
-        card.classList.add("card", "face-down"); // Adicione a classe "face-down" aqui
+        card.classList.add("card", "face-down");
         card.setAttribute("data-id", i);
         card.textContent = cardsArray[i];
         card.addEventListener("click", flipCard);
@@ -21,17 +21,15 @@ function createBoard() {
 
 
 function checkForMatch() {
-    const [id1, id2] = cardsChosenId;
-
     if (cardsChosen[0] === cardsChosen[1]) {
-        cardsMatched.push(cardsChosenId);
-        const matchedCards = document.querySelectorAll(`[data-id="${id1}"], [data-id="${id2}"]`);
+        cardsMatched.push(cardsChosen[0]);
+        const matchedCards = document.querySelectorAll(`[data-id="${cardsChosenId[0]}"], [data-id="${cardsChosenId[1]}"]`);
         matchedCards.forEach(card => card.classList.add("matched"));
     } else {
         const [card1, card2] = cardsChosenId.map(id => document.querySelector(`[data-id="${id}"]`));
         setTimeout(() => {
-            card1.textContent = "";
-            card2.textContent = "";
+            card1.classList.add("face-down");
+            card2.classList.add("face-down");
         }, 1000);
     }
 
@@ -43,6 +41,7 @@ function checkForMatch() {
     }
 }
 
+
 function flipCard() {
     const cardId = this.getAttribute("data-id");
 
@@ -50,7 +49,7 @@ function flipCard() {
         return;
     }
 
-    this.classList.remove("face-down"); // Remova a classe "face-down"
+    this.classList.remove("face-down"); 
     this.classList.add("flip");
     cardsChosen.push(cardsArray[cardId]);
     cardsChosenId.push(cardId);
@@ -75,7 +74,7 @@ function shuffleCards() {
     cards.forEach(card => {
         card.classList.remove("matched");
         card.classList.remove("flip");
-        card.classList.add("face-down"); // Adicione a classe "face-down" aqui
+        card.classList.add("face-down");
         card.textContent = "";
     });
     cardsArray.sort(() => 0.5 - Math.random());

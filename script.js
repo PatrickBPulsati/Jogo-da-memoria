@@ -20,14 +20,14 @@ function createBoard() {
 
 function checkForMatch() {
     if (cardsChosen[0] === cardsChosen[1]) {
-        cardsMatched.push(cardsChosen[0]);
-        const matchedCards = document.querySelectorAll(`[data-id="${cardsChosenId[0]}"], [data-id="${cardsChosenId[1]}"]`);
-        matchedCards.forEach(card => card.classList.add("matched"));
+        // Código para cartas correspondentes
     } else {
         const [card1, card2] = cardsChosenId.map(id => document.querySelector(`[data-id="${id}"]`));
         setTimeout(() => {
             card1.classList.add("face-down");
+            card1.classList.remove("flipped"); // Remova a classe 'flipped'
             card2.classList.add("face-down");
+            card2.classList.remove("flipped"); // Remova a classe 'flipped'
         }, 1000);
     }
 
@@ -39,6 +39,7 @@ function checkForMatch() {
     }
 }
 
+
 function flipCard() {
     const cardId = this.getAttribute("data-id");
 
@@ -46,8 +47,8 @@ function flipCard() {
         return;
     }
 
-    this.classList.remove("face-down"); 
-    this.classList.add("flip");
+    this.classList.remove("face-down");
+    this.classList.add("flipped"); // Adicione a classe 'flipped'
     cardsChosen.push(cardsArray[cardId]);
     cardsChosenId.push(cardId);
 
@@ -55,6 +56,8 @@ function flipCard() {
         setTimeout(checkForMatch, 500);
     }
 }
+
+
 
 createBoard();
 

@@ -54,3 +54,18 @@ h1 {
     background-color: gray;
     color: black;
 }
+
+.card {
+    /* ... */
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.card.face-down {
+    /* ... */
+    transform: rotateY(0deg);
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}

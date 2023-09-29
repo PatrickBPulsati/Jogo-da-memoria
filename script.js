@@ -32,7 +32,18 @@ function createBoard() {
 // Função para verificar se duas cartas escolhidas são iguais
 function checkForMatch() {
     if (cardsChosen[0] === cardsChosen[1]) {
-        // Se as duas cartas escolhidas forem iguais ele não faz nada
+        // Se as duas cartas escolhidas forem iguais, adicione a classe "matched" a ambas
+        const [card1, card2] = cardsChosenId.map(id => document.querySelector(`[data-id="${id}"]`));
+        card1.classList.add("matched");
+        card2.classList.add("matched");
+    
+        // Limpa as listas de cartas escolhidas
+        cardsChosen = [];
+        cardsChosenId = [];
+    
+        if (document.querySelectorAll(".matched").length === cardsArray.length) {
+            alert("Parabéns! Você encontrou todos os pares.");
+        }
     } else {
         // Caso contrário, vira as cartas novamente após um tempo
         const [card1, card2] = cardsChosenId.map(id => document.querySelector(`[data-id="${id}"]`));
@@ -42,16 +53,12 @@ function checkForMatch() {
             card2.classList.add("face-down");
             card2.classList.remove("flipped");
         }, 1000);
+    
+        // Limpa as listas de cartas escolhidas
+        cardsChosen = [];
+        cardsChosenId = [];
     }
-
-    // Limpa as listas de cartas escolhidas
-    cardsChosen = [];
-    cardsChosenId = [];
-
-    if (cardsMatched.length === cardsArray.length / 2) {
-        alert("Parabéns! Você encontrou todos os pares.");
-    }
-}
+}    
 
 // Função para virar uma carta quando clicada
 function flipCard() {
@@ -66,17 +73,17 @@ function flipCard() {
     this.classList.remove("face-down");
     this.classList.add("flipped");
     
-    // Adiciona a carta escolhida aos arrays de cartas escolhidas e IDs
+    // Adiciona a carta escolhida as listas de cartas escolhidas e IDs
     cardsChosen.push(cardsArray[cardId]);
     cardsChosenId.push(cardId);
 
-    // Quando duas cartas foram escolhidas, verifica se elas correspondem após um pequeno atraso
+    // Quando duas cartas foram escolhidas, verifica se elas correspondem
     if (cardsChosenId.length === 2) {
         setTimeout(checkForMatch, 500);
     }
 }
 
-// Chama a função para criar o tabuleiro quando o documento HTML estiver carregado
+// Chama a função para criar o tabuleiro
 createBoard();
 
 document.addEventListener("DOMContentLoaded", () => {

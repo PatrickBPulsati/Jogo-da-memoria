@@ -56,13 +56,11 @@ h1 {
 }
 
 .card {
-    /* ... */
     transform-style: preserve-3d;
     transition: transform 0.5s;
 }
 
 .card.face-down {
-    /* ... */
     transform: rotateY(0deg);
 }
 
